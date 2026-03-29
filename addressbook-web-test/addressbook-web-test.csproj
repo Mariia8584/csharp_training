@@ -167,10 +167,12 @@
     <Error Condition="!Exists('packages\Microsoft.NET.Test.Sdk.18.3.0\build\net462\Microsoft.NET.Test.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NET.Test.Sdk.18.3.0\build\net462\Microsoft.NET.Test.Sdk.props'))" />
     <Error Condition="!Exists('packages\Microsoft.NET.Test.Sdk.18.3.0\build\net462\Microsoft.NET.Test.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NET.Test.Sdk.18.3.0\build\net462\Microsoft.NET.Test.Sdk.targets'))" />
     <Error Condition="!Exists('packages\NUnitTestAdapter.2.3.0\build\NUnitTestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnitTestAdapter.2.3.0\build\NUnitTestAdapter.props'))" />
+    <Error Condition="!Exists('packages\Selenium.WebDriver.GeckoDriver.0.36.0\build\Selenium.WebDriver.GeckoDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.GeckoDriver.0.36.0\build\Selenium.WebDriver.GeckoDriver.targets'))" />
   </Target>
   <Import Project="packages\MSTest.TestAdapter.2.2.10\build\net46\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.2.2.10\build\net46\MSTest.TestAdapter.targets')" />
   <Import Project="packages\Microsoft.Testing.Platform.2.1.0\build\netstandard2.0\Microsoft.Testing.Platform.targets" Condition="Exists('packages\Microsoft.Testing.Platform.2.1.0\build\netstandard2.0\Microsoft.Testing.Platform.targets')" />
   <Import Project="packages\Microsoft.Testing.Platform.MSBuild.2.1.0\build\Microsoft.Testing.Platform.MSBuild.targets" Condition="Exists('packages\Microsoft.Testing.Platform.MSBuild.2.1.0\build\Microsoft.Testing.Platform.MSBuild.targets')" />
   <Import Project="packages\Microsoft.CodeCoverage.18.3.0\build\netstandard2.0\Microsoft.CodeCoverage.targets" Condition="Exists('packages\Microsoft.CodeCoverage.18.3.0\build\netstandard2.0\Microsoft.CodeCoverage.targets')" />
   <Import Project="packages\Microsoft.NET.Test.Sdk.18.3.0\build\net462\Microsoft.NET.Test.Sdk.targets" Condition="Exists('packages\Microsoft.NET.Test.Sdk.18.3.0\build\net462\Microsoft.NET.Test.Sdk.targets')" />
+  <Import Project="packages\Selenium.WebDriver.GeckoDriver.0.36.0\build\Selenium.WebDriver.GeckoDriver.targets" Condition="Exists('packages\Selenium.WebDriver.GeckoDriver.0.36.0\build\Selenium.WebDriver.GeckoDriver.targets')" />
 </Project>
