@@ -33,12 +33,12 @@ namespace WebAddressbookTests
         {
             get
             {
-                return username;
+                return password;
             }
 
             set
             {
-                username = value;
+                password = value;
             }
         }
     }
