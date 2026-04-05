@@ -28,6 +28,7 @@ namespace WebAddressbookTests
                 this.firstname = value;
             }
         }
+
         public string Lastname
         {
             get

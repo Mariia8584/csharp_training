@@ -29,6 +29,7 @@ namespace WebAddressbookTests
                 username = value;
             }           
         }
+
         public string Password
         {
             get

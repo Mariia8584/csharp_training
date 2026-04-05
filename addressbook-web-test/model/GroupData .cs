@@ -18,7 +18,6 @@ namespace WebAddressbookTests
             this.name = name;
         }
           
-
         public string Name
         { 
             get 
@@ -29,7 +28,8 @@ namespace WebAddressbookTests
             {
                 name = value;
             }   
-        }    
+        }  
+        
         public string Header 
         {
             get
@@ -41,6 +41,7 @@ namespace WebAddressbookTests
                 header = value;
             }
         }
+
         public string Footer
         {
             get
