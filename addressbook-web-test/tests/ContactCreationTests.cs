@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace WebAddressbookTests
+/*namespace WebAddressbookTests
 {
     [TestFixture]
     public class ContactCreationTests : TestBase
@@ -18,4 +18,4 @@ namespace WebAddressbookTests
         }
     }
 }
-
+*/

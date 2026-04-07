@@ -1,7 +1,8 @@
 ﻿using OpenQA.Selenium;
+using System;
 
 
-namespace WebAddressbookTests
+/*namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
@@ -33,3 +34,4 @@ namespace WebAddressbookTests
         }
     }
 }
+*/
