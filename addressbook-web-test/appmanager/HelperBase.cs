@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
@@ -10,6 +12,11 @@ namespace WebAddressbookTests
         {
             this.manager = manager;
             driver = manager.Driver;
+        }
+
+        public HelperBase(IWebDriver driver)
+        {
+            this.driver = driver;
         }
     }
 }

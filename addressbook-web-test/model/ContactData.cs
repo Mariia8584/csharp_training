@@ -8,24 +8,23 @@ namespace WebAddressbookTests
 {
     public class ContactData
     {
-        private string firstname;
-        private string lastname;
+        public string firstname;
+        public string lastname;
 
-        public ContactData(string firstname, string lastname) 
+        public ContactData(string firstname)
         {
-            this.firstname = firstname; 
-            this.lastname = lastname;
+            this.firstname = firstname;
         }
         
         public string Firstname
         { 
             get 
             { 
-                return this.firstname; 
+                return firstname; 
             }
             set
             {
-                this.firstname = value;
+                firstname = value;
             }
         }
 
@@ -33,11 +32,11 @@ namespace WebAddressbookTests
         {
             get
             {
-                return this.lastname;
+                return lastname;
             }
             set
             {
-                this.lastname = value;
+                lastname = value;
             }
         }
     }

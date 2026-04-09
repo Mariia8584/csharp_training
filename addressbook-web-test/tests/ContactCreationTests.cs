@@ -1,6 +1,11 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
-/*namespace WebAddressbookTests
+namespace WebAddressbookTests
 {
     [TestFixture]
     public class ContactCreationTests : TestBase
@@ -8,14 +13,20 @@
         [Test]
         public void ContactCreationTest()
         {
-            app.Navigator.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Contacts.InitNewContactCreation();
-            app.Contacts.FillContactForm(new ContactData("P", "P"));
-            app.Contacts.SubmitContactCreation();
-            app.Contacts.ReternToContactsPage();
-            app.Auth.Logout();
+            ContactData contact = new ContactData("GG");
+            contact.Lastname = "DD";
+
+            app.Contacts.CreateContact(contact);
+        }
+
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            ContactData contact = new ContactData("");
+            contact.Lastname = "";
+
+            app.Contacts.CreateContact(contact);
         }
     }
 }
-*/
+
