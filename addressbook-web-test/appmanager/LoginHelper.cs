@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace WebAddressbookTests
 {
@@ -9,13 +11,39 @@ namespace WebAddressbookTests
         public LoginHelper(ApplicationManager manager) : base(manager) { }
         public void Login(AccountData account)
         {
+            if (IsLoggedIn()) 
+            {
+                if (IsLoggedIn(account)) 
+                {
+                    return;
+                }
+                Logout();   
+            }
             Type(By.Name("user"), account.Username);
             Type(By.Name("pass"), account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
+
         public void Logout()
         {
-            driver.FindElement(By.LinkText("Logout")).Click();
+            if (IsLoggedIn()) 
+            {
+                driver.FindElement(By.LinkText("Logout")).Click();
+            }
         }
+
+        public bool IsLoggedIn()
+        {
+            return IsElementPresent(By.Name("logout"));
+        }
+
+        public bool IsLoggedIn(AccountData account)
+        {
+            return IsLoggedIn(account)
+                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text 
+                    == "(" + account.Username + ")";
+        }
+
+
     }
 }

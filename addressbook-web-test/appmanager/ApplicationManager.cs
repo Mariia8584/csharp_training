@@ -37,7 +37,10 @@ namespace WebAddressbookTests
         {
             if (! app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+                //изменили строки из-за TestSuitFixture
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.OpenHomePage();
+                app.Value = newInstance;
             }
             return app.Value;
         }

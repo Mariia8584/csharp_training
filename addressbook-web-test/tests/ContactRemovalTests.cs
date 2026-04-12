@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : TestBase
+    public class ContactRemovalTests : AuthTestBase
     {
         public IWebDriver driver;
         public bool acceptNextAlert = true;
