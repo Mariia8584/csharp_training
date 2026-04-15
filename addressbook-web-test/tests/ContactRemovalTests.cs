@@ -20,7 +20,6 @@ namespace WebAddressbookTests
             app.Contacts.RemoveContact(1);
         }
 
-
        public bool IsAlertPresent()
         {
             try

@@ -22,6 +22,12 @@ namespace WebAddressbookTests
 
         public ContactHelper Modify(int v, ContactData newData)
         {
+            if (!IsContactPresent())
+            {
+                ContactData defaultContact = new ContactData("defaultContact");
+                CreateContact(defaultContact);
+            }
+
             manager.Navigator.GoToContactsPage();
             SelectContact(v);
             InitContactModification();
@@ -32,7 +38,14 @@ namespace WebAddressbookTests
         }
 
         public ContactHelper RemoveContact(int v)
+
         {
+            if (!IsContactPresent())
+            {
+                ContactData defaultContact = new ContactData("defaultContact");
+                CreateContact(defaultContact);
+            }
+
             manager.Navigator.GoToContactsPage();
             SelectContact(v);
             SubmitContactRemove();
@@ -86,6 +99,12 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
             return this;
+        }
+
+        private bool IsContactPresent()
+        {
+            manager.Navigator.GoToContactsPage();
+            return IsElementPresent(By.Name("selected[]"));
         }
     }
 }

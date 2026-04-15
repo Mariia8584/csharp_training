@@ -37,7 +37,6 @@ namespace WebAddressbookTests
         {
             if (! app.IsValueCreated)
             {
-                //изменили строки из-за TestSuitFixture
                 ApplicationManager newInstance = new ApplicationManager();
                 newInstance.Navigator.OpenHomePage();
                 app.Value = newInstance;
