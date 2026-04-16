@@ -11,8 +11,15 @@ namespace WebAddressbookTests
     public class ContactModificationTests : AuthTestBase
     {
         [Test]
+        
         public void ContactModificationTest()
         {
+            if (!app.Contacts.IsContactPresent())
+            {
+                ContactData defaultContact = new ContactData("defaultContact");
+                app.Contacts.CreateContact(defaultContact);
+            }
+
             ContactData newData = new ContactData("WW");
             newData.Lastname = "xxx";
 

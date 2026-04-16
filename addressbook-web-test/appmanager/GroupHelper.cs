@@ -21,13 +21,6 @@ namespace WebAddressbookTests
 
         public GroupHelper Modify(int p, GroupData newData)
         {
-
-            if (!IsGroupPresent())
-            {
-                GroupData defaultGroup = new GroupData("defaultGroup");
-                Create(defaultGroup);
-            }
-
             manager.Navigator.GoToGroupsPage();
             SelectGroup(p);
             InitNewGroupModification();
@@ -39,12 +32,6 @@ namespace WebAddressbookTests
 
         public GroupHelper Remove(int p)
         {
-            if (!IsGroupPresent())
-            {
-                GroupData defaultGroup = new GroupData("defaultGroup");
-                Create(defaultGroup);
-            }
-
             manager.Navigator.GoToGroupsPage();
             SelectGroup(p);
             RemoveGroup();
