@@ -19,7 +19,14 @@ namespace WebAddressbookTests
                 app.Groups.Create(defaultGroup);
             }
 
-            app.Groups.Remove(1);
+            List<GroupData> OldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Remove(0);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            OldGroups.RemoveAt(0);
+            Assert.AreEqual(OldGroups, newGroups);
         }
     }
 }
