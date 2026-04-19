@@ -16,7 +16,12 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("GG");
             contact.Lastname = "DD";
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.CreateContact(contact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
 
         [Test]
@@ -25,7 +30,26 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("");
             contact.Lastname = "";
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.CreateContact(contact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+        }
+
+        [Test]
+        public void BadNameContactCreationTest()
+        {
+            ContactData contact = new ContactData("a'a");
+            contact.Lastname = "";
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            app.Contacts.CreateContact(contact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
     }
 }
