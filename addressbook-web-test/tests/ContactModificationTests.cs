@@ -23,7 +23,7 @@ namespace WebAddressbookTests
             ContactData newData = new ContactData("WW");
             newData.Lastname = "xxx";
 
-            app.Contacts.Modify(1, newData);
+            app.Contacts.Modify(0, newData);
         }
     }
 }

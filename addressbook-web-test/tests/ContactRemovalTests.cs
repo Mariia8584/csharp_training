@@ -23,7 +23,14 @@ namespace WebAddressbookTests
                 app.Contacts.CreateContact(defaultContact);
             }
 
-            app.Contacts.RemoveContact(1);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            app.Contacts.RemoveContact(0);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+
+            oldContacts.RemoveAt(0);
+            Assert.AreEqual(oldContacts, newContacts);
         }
 
        public bool IsAlertPresent()
