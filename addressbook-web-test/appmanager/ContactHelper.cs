@@ -100,10 +100,13 @@ namespace WebAddressbookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.GoToContactsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
-            foreach (IWebElement element in elements)
+            ICollection<IWebElement> rows = driver.FindElements(By.CssSelector("tr[name='entry']"));
+
+            foreach (IWebElement row in rows)
             {
-                contacts.Add(new ContactData(element.Text));
+                ContactData contact = new ContactData(row.FindElement(By.XPath(".//td[3]")).Text);
+                contact.Lastname = row.FindElement(By.XPath(".//td[2]")).Text;
+                contacts.Add(contact);
             }
             return contacts;
         }

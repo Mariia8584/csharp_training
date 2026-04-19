@@ -23,7 +23,15 @@ namespace WebAddressbookTests
             ContactData newData = new ContactData("WW");
             newData.Lastname = "xxx";
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Modify(0, newData);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0] = newData;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
