@@ -38,14 +38,19 @@ namespace WebAddressbookTests
         {
             return "firstname=" + Firstname;
         }
-        
+
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname) ^ Lastname.CompareTo(other.lastname);
+            int result = Lastname.CompareTo(other.Lastname);
+            if (result != 0)
+            {
+                return result;
+            }
+            return Firstname.CompareTo(other.Firstname);
         }
 
         public string Firstname
