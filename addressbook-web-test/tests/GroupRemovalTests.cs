@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -19,14 +20,15 @@ namespace WebAddressbookTests
                 app.Groups.Create(defaultGroup);
             }
 
-            List<GroupData> OldGroups = app.Groups.GetGroupList();
-
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Remove(0);
+
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
-            OldGroups.RemoveAt(0);
-            Assert.AreEqual(OldGroups, newGroups);
+            oldGroups.RemoveAt(0);
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }
