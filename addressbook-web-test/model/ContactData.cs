@@ -53,28 +53,8 @@ namespace WebAddressbookTests
             return Firstname.CompareTo(other.Firstname);
         }
 
-        public string Firstname
-        { 
-            get 
-            { 
-                return firstname; 
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
+        public string Firstname { get; set; }
 
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
+        public string Lastname { get; set; }
     }
 }
