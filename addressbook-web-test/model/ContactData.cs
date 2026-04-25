@@ -10,9 +10,7 @@ namespace WebAddressbookTests
     {
         public string text;
         public string allPhones;
-
-        //public string firstname;
-        //public string lastname = "";
+        public string allEmails;
 
         public ContactData(string firstname, string lastname)
         {
@@ -43,9 +41,37 @@ namespace WebAddressbookTests
 
         public string ThirdEmail { get; set; }
 
-        public string AllPhones 
+        public string AllEmails
         { 
             get 
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanupEmail(FirstEmail) + CleanupEmail(SecondEmail) + CleanupEmail(ThirdEmail)).Trim(); 
+                }
+            }
+            set 
+            {
+                allEmails = value;
+            } 
+        }
+
+        private string CleanupEmail(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email.Replace(" ", "") + "\r\n";
+        }
+
+        public string AllPhones
+        {
+            get
             {
                 if (allPhones != null)
                 {
@@ -53,13 +79,13 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Cleanup(HomePhone) + Cleanup(MobilePhone) + Cleanup(WorkPhone)).Trim(); 
+                    return (Cleanup(HomePhone) + Cleanup(MobilePhone) + Cleanup(WorkPhone)).Trim();
                 }
             }
-            set 
+            set
             {
-                AllPhones = value;
-            } 
+                allPhones = value;
+            }
         }
 
         private string Cleanup(string phone)
@@ -87,13 +113,11 @@ namespace WebAddressbookTests
 
         public override int GetHashCode()
         {
-            //return (Firstname?.GetHashCode() ?? 0) ^ (Lastname?.GetHashCode() ?? 0);
             return (Firstname + " " + Lastname).GetHashCode();
         }
 
         public override string ToString()
         {
-            //return "firstname=" + Firstname;
             return Firstname + " " + Lastname;
         }
 

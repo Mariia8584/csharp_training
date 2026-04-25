@@ -25,7 +25,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToContactsPage();
             SelectContact(v);
-            InitContactModification(0);
+            InitContactModification(v);
             FillContactForm(newData);
             SubmitContactModification();
             ReturnToContactsPage();
@@ -93,7 +93,6 @@ namespace WebAddressbookTests
                 .FindElements(By.TagName("td"))[7]
                 .FindElement(By.TagName("a")).Click();
 
-            //driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
             return this;
         }
 
@@ -132,14 +131,13 @@ namespace WebAddressbookTests
             string firstname = cells[2].Text;
             string address = cells[3].Text;
             string allPhones = cells[5].Text;
+            string allEmails = cells[4].Text;
 
             return new ContactData(firstname, lastname)
             {
                 Address = address,
-                allPhones = allPhones
-                //FirstEmail = firstEmail,
-                //SecondEmail = secondEmail,
-                //ThirdEmail = thirdEmail
+                AllPhones = allPhones,
+                AllEmails = allEmails
             };
 
         }
@@ -156,9 +154,9 @@ namespace WebAddressbookTests
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            //string firstEmail = driver.FindElement(By.Name("email1")).GetAttribute("value");
-            //string secondEmail = driver.FindElement(By.Name("email2")).GetAttribute("value");
-            //string thirdEmail = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            string firstEmail = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string secondEmail = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string thirdEmail = driver.FindElement(By.Name("email3")).GetAttribute("value");
 
             return new ContactData(firstname, lastname)
             {
@@ -166,9 +164,9 @@ namespace WebAddressbookTests
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone,
-                //FirstEmail = firstEmail,
-                //SecondEmail = secondEmail,
-                //ThirdEmail = thirdEmail
+                FirstEmail = firstEmail,
+                SecondEmail = secondEmail,
+                ThirdEmail = thirdEmail
             };
 
             throw new NotImplementedException();
