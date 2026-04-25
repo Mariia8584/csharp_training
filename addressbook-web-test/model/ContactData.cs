@@ -8,13 +8,67 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        public string text;
+        public string allPhones;
+
         //public string firstname;
         //public string lastname = "";
 
-        public ContactData(string firstname)
+        public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
-            Lastname = "";
+            Lastname = lastname;
+        }
+
+        public ContactData(string text)
+        {
+            this.text = text;
+        }
+
+        public string Firstname { get; set; }
+
+        public string Lastname { get; set; }
+
+        public string Address { get; set; }
+
+        public string HomePhone { get; set; }
+
+        public string MobilePhone { get; set; }
+
+        public string WorkPhone { get; set; }
+
+        public string FirstEmail { get; set; }
+
+        public string SecondEmail { get; set; }
+
+        public string ThirdEmail { get; set; }
+
+        public string AllPhones 
+        { 
+            get 
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (Cleanup(HomePhone) + Cleanup(MobilePhone) + Cleanup(WorkPhone)).Trim(); 
+                }
+            }
+            set 
+            {
+                AllPhones = value;
+            } 
+        }
+
+        private string Cleanup(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
         }
 
         public bool Equals(ContactData other)
@@ -27,17 +81,20 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return Firstname == other.Firstname && Lastname == other.Lastname;
+            return Firstname == other.Firstname 
+                && Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
         {
-            return (Firstname?.GetHashCode() ?? 0) ^ (Lastname?.GetHashCode() ?? 0);
+            //return (Firstname?.GetHashCode() ?? 0) ^ (Lastname?.GetHashCode() ?? 0);
+            return (Firstname + " " + Lastname).GetHashCode();
         }
 
         public override string ToString()
         {
-            return "firstname=" + Firstname;
+            //return "firstname=" + Firstname;
+            return Firstname + " " + Lastname;
         }
 
         public int CompareTo(ContactData other)
@@ -53,9 +110,5 @@ namespace WebAddressbookTests
             }
             return Firstname.CompareTo(other.Firstname);
         }
-
-        public string Firstname { get; set; }
-
-        public string Lastname { get; set; }
     }
 }
