@@ -160,6 +160,7 @@
     <Compile Include="appmanager\LoginHelper.cs" />
     <Compile Include="appmanager\NavigationHelper.cs" />
     <Compile Include="lessons\Square.cs" />
+    <Compile Include="tests\SearchTests.cs" />
     <Compile Include="tests\TestBase.cs" />
     <Compile Include="lessons\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

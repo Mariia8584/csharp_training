@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WebAddressbookTests
@@ -20,7 +21,8 @@ namespace WebAddressbookTests
 
         public ContactData(string text)
         {
-            this.text = text;
+            Firstname = text;
+            Lastname = "";
         }
 
         public string Firstname { get; set; }
@@ -66,7 +68,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return email.Replace(" ", "") + "\r\n";
+            return Regex.Replace(email, " ", "") + "\r\n";
         }
 
         public string AllPhones
@@ -94,7 +96,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            return Regex.Replace(phone, "[^0-9+]", "") + "\r\n";
         }
 
         public bool Equals(ContactData other)

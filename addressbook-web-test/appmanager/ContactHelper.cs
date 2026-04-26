@@ -3,6 +3,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 
 namespace WebAddressbookTests
@@ -168,8 +169,13 @@ namespace WebAddressbookTests
                 SecondEmail = secondEmail,
                 ThirdEmail = thirdEmail
             };
+        }
 
-            throw new NotImplementedException();
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.GoToContactsPage();
+            string text = driver.FindElement(By.Id("search_count")).Text;
+            return Int32.Parse(text);
         }
     }
 }
