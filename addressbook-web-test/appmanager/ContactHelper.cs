@@ -3,6 +3,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 
@@ -97,6 +98,16 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper InitContactViewDetails(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+
+            return this;
+
+        }
+
         public bool IsContactPresent()
         {
             manager.Navigator.GoToContactsPage();
@@ -171,11 +182,42 @@ namespace WebAddressbookTests
             };
         }
 
+        public ContactData GetContactInformationFromViewPage(int index)
+        {
+            manager.Navigator.GoToContactsPage();
+            InitContactViewDetails(0);
+
+            string fullText = driver.FindElement(By.Id("content")).Text.Replace("\r", "");
+            string[] lines = fullText.Split('\n');
+
+            string firstname = lines[0].Split(' ')[0].Trim();
+            string lastname = lines[0].Split(' ')[1].Trim();
+            string address = (lines[1] + "\r\n" + lines[2] + "\r\n" + lines[3] + "\r\n" + lines[4]).Trim();
+
+            var contact = new ContactData(firstname, lastname)
+            {
+                Address = address,
+                HomePhone = lines[6].Replace("H:", "").Trim(),
+                WorkPhone = lines[7].Replace("W:", "").Trim(),
+                FirstEmail = lines[9].Trim(),
+                SecondEmail = lines[10].Trim(),
+                ThirdEmail = lines[11].Trim()
+            };
+
+            return new ContactData(firstname, lastname)
+            {
+                Address = address,
+                AllPhones = contact.AllPhones,
+                AllEmails = contact.AllEmails
+            };
+        }
+
         public int GetNumberOfSearchResults()
         {
             manager.Navigator.GoToContactsPage();
             string text = driver.FindElement(By.Id("search_count")).Text;
             return Int32.Parse(text);
         }
+
     }
 }
