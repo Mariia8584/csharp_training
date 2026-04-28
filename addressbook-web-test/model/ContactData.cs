@@ -115,7 +115,7 @@ namespace WebAddressbookTests
 
         public override int GetHashCode()
         {
-            return (Firstname + " " + Lastname).GetHashCode();
+            return ("firstname=" + Firstname + "\nlastname=" + Lastname).GetHashCode();
         }
 
         public override string ToString()
