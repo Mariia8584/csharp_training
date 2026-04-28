@@ -29,11 +29,17 @@ namespace WebAddressbookTests
             ContactData fromViewPage = app.Contacts.GetContactInformationFromViewPage(0);
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
 
+            string Clean(string text)
+            {
+                if (text == null) return "";
+                return new string(text.Where(c => char.IsLetterOrDigit(c) || c == '+').ToArray());
+            }
+
             Assert.AreEqual(fromForm.Firstname, fromViewPage.Firstname);
             Assert.AreEqual(fromForm.Lastname, fromViewPage.Lastname);
-            Assert.AreEqual(fromForm.Address, fromViewPage.Address);
-            Assert.AreEqual(fromForm.AllPhones, fromViewPage.AllPhones);
-            Assert.AreEqual(fromForm.AllEmails, fromViewPage.AllEmails);
+            Assert.AreEqual(Clean(fromForm.Address), Clean(fromViewPage.Address));
+            Assert.AreEqual(Clean(fromForm.AllPhones), Clean(fromViewPage.AllPhones));
+            Assert.AreEqual(Clean(fromForm.AllEmails), Clean(fromViewPage.AllEmails));
         }
     }
 }

@@ -187,28 +187,22 @@ namespace WebAddressbookTests
             manager.Navigator.GoToContactsPage();
             InitContactViewDetails(0);
 
-            string fullText = driver.FindElement(By.Id("content")).Text.Replace("\r", "");
-            string[] lines = fullText.Split('\n');
+            string[] lines = driver.FindElement(By.Id("content")).Text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-            string firstname = lines[0].Split(' ')[0].Trim();
-            string lastname = lines[0].Split(' ')[1].Trim();
-            string address = (lines[1] + "\r\n" + lines[2] + "\r\n" + lines[3] + "\r\n" + lines[4]).Trim();
+            var nameParts = lines[0].Trim().Split(' ');
+            string firstname = nameParts[0];
+            string lastname = nameParts.Length > 1 ? nameParts[1] : "";
 
-            var contact = new ContactData(firstname, lastname)
-            {
-                Address = address,
-                HomePhone = lines[6].Replace("H:", "").Trim(),
-                WorkPhone = lines[7].Replace("W:", "").Trim(),
-                FirstEmail = lines[9].Trim(),
-                SecondEmail = lines[10].Trim(),
-                ThirdEmail = lines[11].Trim()
-            };
+            int phoneIndex = Array.FindIndex(lines, l => l.Contains("H:") || l.Contains("W:"));
+            string address = phoneIndex > 1 ? string.Join(" ", lines.Skip(1).Take(phoneIndex - 1)) : "";
 
             return new ContactData(firstname, lastname)
             {
                 Address = address,
-                AllPhones = contact.AllPhones,
-                AllEmails = contact.AllEmails
+                AllPhones = string.Join(" ", lines.Where(l => l.Contains("H:") || l.Contains("W:"))
+                                                 .Select(l => l.Split(':')[1].Trim())),
+                AllEmails = string.Join(" ", lines.Where(l => l.Contains("@") && !l.Contains("H:") && !l.Contains("W:"))
+                                                 .Select(l => l.Trim()))
             };
         }
 
