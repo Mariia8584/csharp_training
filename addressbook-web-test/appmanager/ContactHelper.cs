@@ -182,34 +182,47 @@ namespace WebAddressbookTests
             };
         }
 
-        public ContactData GetContactInformationFromViewPage(int index)
+        public string GetActualContactText(int index)
         {
-            manager.Navigator.GoToContactsPage();
-            InitContactViewDetails(0);
+                manager.Navigator.GoToContactsPage();
+                InitContactViewDetails(index);
 
-            string fullText = driver.FindElement(By.Id("content")).Text.Replace("\r", "");
-            string[] lines = fullText.Split('\n');
+                string text = driver.FindElement(By.Id("content")).Text;
+                var nonEmptyLines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-            string firstname = lines[0].Split(' ')[0].Trim();
-            string lastname = lines[0].Split(' ')[1].Trim();
-            string address = (lines[1] + "\r\n" + lines[2] + "\r\n" + lines[3] + "\r\n" + lines[4]).Trim();
+                return string.Join("\r\n", nonEmptyLines);
+        }
 
-            var contact = new ContactData(firstname, lastname)
-            {
-                Address = address,
-                HomePhone = lines[6].Replace("H:", "").Trim(),
-                WorkPhone = lines[7].Replace("W:", "").Trim(),
-                FirstEmail = lines[9].Trim(),
-                SecondEmail = lines[10].Trim(),
-                ThirdEmail = lines[11].Trim()
-            };
+        public string GetExpectedContactText(int index)
+        {
+            ContactData contact = GetContactInformationFromEditForm(index);
+            return GetExpectedContactText(contact);
+        }
 
-            return new ContactData(firstname, lastname)
-            {
-                Address = address,
-                AllPhones = contact.AllPhones,
-                AllEmails = contact.AllEmails
-            };
+        public string GetExpectedContactText(ContactData contact)
+        {
+            var parts = new List<string>();
+
+            parts.Add($"{contact.Firstname} {contact.Lastname}");
+
+            if (!string.IsNullOrEmpty(contact.Address))
+                parts.Add(contact.Address);
+
+            var phones = new List<string>();
+            if (!string.IsNullOrEmpty(contact.HomePhone)) phones.Add($"H: {contact.HomePhone}");
+            if (!string.IsNullOrEmpty(contact.MobilePhone)) phones.Add($"M: {contact.MobilePhone}");
+            if (!string.IsNullOrEmpty(contact.WorkPhone)) phones.Add($"W: {contact.WorkPhone}");
+            if (phones.Any())
+                parts.AddRange(phones);
+
+            var emails = new List<string>();
+            if (!string.IsNullOrEmpty(contact.FirstEmail)) emails.Add(contact.FirstEmail);
+            if (!string.IsNullOrEmpty(contact.SecondEmail)) emails.Add(contact.SecondEmail);
+            if (!string.IsNullOrEmpty(contact.ThirdEmail)) emails.Add(contact.ThirdEmail);
+            if (emails.Any())
+                parts.AddRange(emails);
+
+            return string.Join("\r\n", parts);
         }
 
         public int GetNumberOfSearchResults()
