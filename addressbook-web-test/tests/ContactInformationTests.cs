@@ -26,14 +26,10 @@ namespace WebAddressbookTests
         [Test]
         public void TestContactDetailInformation()
         {
-            ContactData fromViewPage = app.Contacts.GetContactInformationFromViewPage(0);
-            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
-
-            Assert.AreEqual(fromForm.Firstname, fromViewPage.Firstname);
-            Assert.AreEqual(fromForm.Lastname, fromViewPage.Lastname);
-            Assert.AreEqual(fromForm.Address, fromViewPage.Address);
-            Assert.AreEqual(fromForm.AllPhones, fromViewPage.AllPhones);
-            Assert.AreEqual(fromForm.AllEmails, fromViewPage.AllEmails);
+            Assert.AreEqual(
+                app.Contacts.GetExpectedContactText(0),
+                app.Contacts.GetActualContactText(0)
+            );
         }
     }
 }
