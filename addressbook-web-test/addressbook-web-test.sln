@@ -5,6 +5,11 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addressbook-web-test", "addressbook-web-test.csproj", "{50850AC2-0DC6-4C67-A206-8C82297B25B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addressbool-test-data-generators", "..\addressbool-test-data-generators\addressbool-test-data-generators.csproj", "{0609721A-5DF6-4DB3-A444-980D2DA5FA14}"
+	ProjectSection(ProjectDependencies) = postProject
+		{50850AC2-0DC6-4C67-A206-8C82297B25B8} = {50850AC2-0DC6-4C67-A206-8C82297B25B8}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,12 +20,20 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Debug|x64.ActiveCfg = Debug|x64
-		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Debug|x64.Build.0 = Debug|x64
+		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Debug|x64.Build.0 = Debug|Any CPU
 		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Release|x64.ActiveCfg = Release|x64
 		{50850AC2-0DC6-4C67-A206-8C82297B25B8}.Release|x64.Build.0 = Release|x64
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Debug|x64.Build.0 = Debug|Any CPU
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Release|x64.ActiveCfg = Release|Any CPU
+		{0609721A-5DF6-4DB3-A444-980D2DA5FA14}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
