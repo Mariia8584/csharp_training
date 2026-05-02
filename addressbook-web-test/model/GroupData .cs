@@ -5,10 +5,15 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace WebAddressbookTests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
+        public GroupData()
+        {
+        }
+
         public GroupData(string name)
         {
             Name = name;
