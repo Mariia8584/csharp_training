@@ -173,7 +173,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="groups.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="lessons\ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
