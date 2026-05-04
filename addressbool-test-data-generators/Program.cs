@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using WebAddressbookTests;
+using Newtonsoft.Json;
 
 namespace addressbool_test_data_generators
 {
@@ -29,6 +30,7 @@ namespace addressbool_test_data_generators
                     Footer = TestBase.GenerateRandomString(100)
                 });
             }
+
             if (format == "csv")
             {
                 writeGroupsToCsvFile(groups, writer);
@@ -36,6 +38,10 @@ namespace addressbool_test_data_generators
             else if (format == "xml")
             {
                 writeGroupsToXmlFile(groups, writer);
+            }
+            else if (format == "json")
+            {
+                writeGroupsToJsonFile(groups, writer);
             }
             else
             {
@@ -55,6 +61,11 @@ namespace addressbool_test_data_generators
         static void writeGroupsToXmlFile(List<GroupData> groups, StreamWriter writer)
         {
             new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
+        }
+
+        static void writeGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
         }
 
     }
