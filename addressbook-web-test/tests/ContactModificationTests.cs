@@ -9,10 +9,10 @@ using System.Text.RegularExpressions;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
         [Test]
-        
+
         public void ContactModificationTest()
         {
             if (!app.Contacts.IsContactPresent())
@@ -24,11 +24,12 @@ namespace WebAddressbookTests
             ContactData newData = new ContactData("WW");
             newData.Lastname = "xxx";
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeModify = oldContacts[0];
 
-            app.Contacts.Modify(0, newData);
+            app.Contacts.Modify(toBeModify, newData);
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts[0] = newData;
             oldContacts.Sort();
             newContacts.Sort();

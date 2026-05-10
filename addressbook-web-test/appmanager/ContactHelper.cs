@@ -34,11 +34,33 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper Modify(ContactData contact, ContactData newData)
+        {
+            manager.Navigator.GoToContactsPage();
+
+            SelectContact(contact.Id);
+            InitContactModification(contact.Id);
+            FillContactForm(newData);
+            SubmitContactModification();
+            ReturnToContactsPage();
+            return this;
+        }
+
         public ContactHelper RemoveContact(int v)
 
         {
             manager.Navigator.GoToContactsPage();
             SelectContact(v);
+            SubmitContactRemove();
+            ReturnToContactsPage();
+            return this;
+        }
+
+        public ContactHelper Remove(ContactData contact)
+        {
+            manager.Navigator.GoToContactsPage();
+
+            SelectContact(contact.Id);
             SubmitContactRemove();
             ReturnToContactsPage();
             return this;
@@ -60,6 +82,12 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"']) ")).Click();
             return this;
         }
 
@@ -95,6 +123,12 @@ namespace WebAddressbookTests
                 .FindElements(By.TagName("td"))[7]
                 .FindElement(By.TagName("a")).Click();
 
+            return this;
+        }
+
+        public ContactHelper InitContactModification(String id)
+        {
+            driver.FindElement(By.XPath("//a[@href='edit.php?id=" + id + "']/img[@title='Edit']")).Click();
             return this;
         }
 
@@ -231,6 +265,5 @@ namespace WebAddressbookTests
             string text = driver.FindElement(By.Id("search_count")).Text;
             return Int32.Parse(text);
         }
-
     }
 }

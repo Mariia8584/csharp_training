@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : ContactTestBase
     {
         public IWebDriver driver;
         public bool acceptNextAlert = true;
@@ -24,11 +24,12 @@ namespace WebAddressbookTests
                 app.Contacts.CreateContact(defaultContact);
             }
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[0];
 
-            app.Contacts.RemoveContact(0);
+            app.Contacts.Remove(toBeRemoved);
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.RemoveAt(0);
             Assert.AreEqual(oldContacts, newContacts);
