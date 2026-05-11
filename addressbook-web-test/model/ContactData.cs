@@ -58,7 +58,6 @@ namespace WebAddressbookTests
         [Column(Name = "email3")]
         public string ThirdEmail { get; set; }
 
-        //возможно id не нужно
         [Column(Name = "id"), PrimaryKey, Identity]
         public string Id { get; set; }
 
