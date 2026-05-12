@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using static LinqToDB.Reflection.Methods.LinqToDB;
 
 
 namespace WebAddressbookTests
@@ -288,6 +289,24 @@ namespace WebAddressbookTests
         public void ClearGroupFilter()
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            GoToContactsPageWithGroupFilter(int.Parse(group.Id));
+            SelectContact(contact.Id);
+            CommitRemovingContactToGroup();
+        }
+
+        public void CommitRemovingContactToGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        public void GoToContactsPageWithGroupFilter(int groupId)
+        {
+            manager.Navigator.GoToContactsPage();
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByValue(groupId.ToString());
         }
     }
 }
