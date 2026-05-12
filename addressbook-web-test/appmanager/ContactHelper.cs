@@ -85,9 +85,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SelectContact(string id)
+        public ContactHelper SelectContact(string contactId)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"']) ")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+ contactId + "']) ")).Click();
             return this;
         }
 
@@ -264,6 +264,30 @@ namespace WebAddressbookTests
             manager.Navigator.GoToContactsPage();
             string text = driver.FindElement(By.Id("search_count")).Text;
             return Int32.Parse(text);
+        }
+
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToContactsPage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
     }
 }

@@ -202,6 +202,7 @@
     <Compile Include="model\GroupContactRelation.cs" />
     <Compile Include="model\GroupData .cs" />
     <Compile Include="appmanager\GroupHelper.cs" />
+    <Compile Include="tests\AddingContactToGroupTests.cs" />
     <Compile Include="tests\AuthTestBase.cs" />
     <Compile Include="tests\ContactInformationTests.cs" />
     <Compile Include="tests\ContactTestBase.cs" />
