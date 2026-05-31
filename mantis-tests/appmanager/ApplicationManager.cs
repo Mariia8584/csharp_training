@@ -15,16 +15,19 @@ namespace mantis_tests
     {
         public IWebDriver driver;
         public string baseURL;
+        public string soapURL;
 
         public ApplicationManager()
         {
             driver = new FirefoxDriver();
             baseURL = "http://localhost";
+            soapURL = "http://localhost/mantisbt-2.28.3/api/soap/mantisconnect.php";
 
             Login = new LoginHelper(this);
-            Project = new ProjectHelper(this);
-
+            AccountData admin = new AccountData("administrator", "root");
+            Project = new ProjectHelper(this, admin);
             driver.Url = "http://localhost/mantisbt-2.28.3/login_page.php";
+            API = new ProjectAPIHelper(this);
         }
 
         public void Stop()
@@ -33,5 +36,6 @@ namespace mantis_tests
         }
         public LoginHelper Login { get; set; }
         public ProjectHelper Project { get; set; }
+        public ProjectAPIHelper API { get; set; }
     }
 }
